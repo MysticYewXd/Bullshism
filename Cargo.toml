@@ -1,12 +1,14 @@
 [package]
 name = "bullshism"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
-description = "A confident, well-engineered calculator that is always wrong."
+rust-version = "1.95"
+description = "A launcher full of apps you should not trust, starting with a calculator that is always wrong."
 license = "MIT"
 repository = "https://github.com/MysticYewXd/Bullshism"
 
 [dependencies]
+eframe = { version = "0.37", default-features = false, features = ["default_fonts", "glow", "wayland", "x11"] }
 
 [profile.release]
 opt-level = 3
