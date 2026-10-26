@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Bullshism
+GenericName=App launcher
+Comment=Apps you absolutely should not trust
+Exec=bullshism
+Icon=accessories-calculator
+Terminal=false
+Categories=Utility;Calculator;
+Keywords=calculator;joke;launcher;
+StartupWMClass=bullshism
