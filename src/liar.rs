@@ -227,9 +227,50 @@ pub fn lie(truth: f64, rng: &mut Rng) -> (f64, Strategy) {
     (fallback, Strategy::OffByOne)
 }
 
+/// The calculator's lie: a random whole number with nothing to do with the truth.
+/// Positive normally, negative in confess mode, and never anywhere near the real answer.
+pub fn wild_guess(truth: f64, negative: bool, rng: &mut Rng) -> f64 {
+    // Close is still too honest: stay at least 10% (and at least 3) away.
+    let margin = (truth.abs() * 0.1).max(3.0);
+    for _ in 0..32 {
+        let digits = 1 + rng.below(5) as u32;
+        let low = if digits == 1 {
+            1
+        } else {
+            10u64.pow(digits - 1)
+        };
+        let n = (low + rng.below(10u64.pow(digits) - low)) as f64;
+        let guess = if negative { -n } else { n };
+        if (guess - truth).abs() > margin {
+            return guess;
+        }
+    }
+    // The truth is somehow sitting on every number we tried. Go further.
+    let far = truth.abs().max(1.0) * 7.0 + 13.0;
+    if negative { -far } else { far }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn wild_guesses_are_far_off_and_signed() {
+        let mut rng = Rng::new(11);
+        for &truth in &[0.0, 1.0, 10.0, -10.0, 42.0, 999.0, 5000.0, 0.5, 1e20] {
+            for negative in [false, true] {
+                for _ in 0..500 {
+                    let guess = wild_guess(truth, negative, &mut rng);
+                    assert_eq!(guess.fract(), 0.0, "{guess} is not a whole number");
+                    assert_eq!(guess < 0.0, negative, "{guess} has the wrong sign");
+                    assert!(
+                        (guess - truth).abs() > 3.0,
+                        "{guess} is too close to {truth}"
+                    );
+                }
+            }
+        }
+    }
 
     #[test]
     fn never_tells_the_truth() {

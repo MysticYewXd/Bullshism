@@ -17,6 +17,11 @@ pub trait BullshitApp {
     fn ui(&mut self, ui: &mut egui::Ui);
 }
 
+/// Load anything the apps need before the first frame, such as fonts.
+pub fn setup(ctx: &egui::Context) {
+    calculator::install_fonts(ctx);
+}
+
 /// Every app the launcher shows, in tile order.
 pub fn all() -> Vec<Box<dyn BullshitApp>> {
     vec![Box::new(calculator::Calculator::new())]

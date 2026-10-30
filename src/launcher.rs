@@ -19,7 +19,7 @@ pub fn run() -> Result<(), String> {
         viewport: egui::ViewportBuilder::default()
             .with_title("Bullshism")
             .with_app_id("bullshism")
-            .with_inner_size([720.0, 660.0])
+            .with_inner_size([720.0, 740.0])
             .with_min_inner_size([420.0, 480.0]),
         ..Default::default()
     };
@@ -28,6 +28,7 @@ pub fn run() -> Result<(), String> {
         options,
         Box::new(|cc| {
             style(&cc.egui_ctx);
+            apps::setup(&cc.egui_ctx);
             Ok(Box::new(Launcher {
                 apps: apps::all(),
                 open: None,
