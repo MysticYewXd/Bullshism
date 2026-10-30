@@ -26,8 +26,9 @@ It is a joke. Please don't do your taxes with it.
 ## Features
 
 - A launcher window with a tile for each app (Escape takes you back to it)
-- A clickable calculator with a keypad, typing, a history of previous lies and a
-  confess switch
+- A frosted-glass calculator with a keypad, typing and a history of previous lies.
+  Every answer is a random number nowhere near the truth, and the confess switch
+  makes it confess to a random negative one instead
 
 - A full expression parser: `+ - * / % ^ !`, brackets, implicit multiplication (`2(3+4)`, `2pi`)
 - Functions: `sqrt cbrt abs sin cos tan asin acos atan ln log exp floor ceil round`
@@ -40,6 +41,10 @@ It is a joke. Please don't do your taxes with it.
 - `--confess` shows the real answer and how it was ruined
 - `--seed N` makes the lies repeatable
 - The terminal side has no dependencies; the launcher uses [egui](https://github.com/emilk/egui)
+- The calculator is set in [Sora](https://github.com/sora-xor/sora-font) (SIL Open Font
+  License, see `assets/fonts/OFL.txt`)
+- The calculator is set in [Sora](https://github.com/sora-xor/sora-font) (SIL Open Font
+  License, see `assets/fonts/OFL.txt`)
 
 ## Build
 
